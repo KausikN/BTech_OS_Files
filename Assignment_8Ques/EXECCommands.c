@@ -125,7 +125,7 @@ int main()
 		else execlpe(cmd_withoutpath, "", (char *)NULL, env);
 	}
 */
-	else if(choice == 4)		// Execv
+	else if(choice == 5)		// Execv
 	{
 		char cmd_withpath[100];
 		char arg[100][100];
@@ -144,7 +144,7 @@ int main()
 		execv(cmd_withpath, arg);
 	}
 
-	else if(choice == 5)		// Execvp
+	else if(choice == 6)		// Execvp
 	{
 		char cmd_withoutpath[100];
 		char arg[100][100];
@@ -163,7 +163,7 @@ int main()
 		execvp(cmd_withoutpath, arg);
 	}
 
-	else if(choice == 6)		// Execve
+	else if(choice == 7)		// Execve
 	{
 		char cmd_withpath[100];
 		char arg[100][100];
@@ -191,7 +191,7 @@ int main()
 		execve(cmd_withpath, arg, env);
 	}
 
-	else if(choice == 7)		// Execvpe
+	else if(choice == 8)		// Execvpe
 	{
 		char cmd_withoutpath[100];
 		char arg[100][100];
