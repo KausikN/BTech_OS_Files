@@ -28,28 +28,16 @@ string GetStdoutFromCommand(string cmd)
 
 
 // ------------------FCFS-------------------------------------
-class FCFS
+class EXECCommands
 {
 	public:
-		int no_of_files;
 		
-		int PID[20], AT[20], BT[20];
-		int CT[20], TAT[20], WT[20];
-
-		int order_of_exe[20];
-
-		int size_of_queue;	
-
-		int max_size;
 
 		void Init();
-		void AddProcess(int pid, int at, int bt);
-		void RemoveProcess(int pid);
-		void Evaluate();
-		void SSort();
+
 };
 
-void FCFS::Init()
+void EXECCommands::Init()
 {
 	size_of_queue = 0;
 
@@ -79,7 +67,15 @@ int main()
 
 	int choice = 0;
 	cout<<"Enter choice: ";
+	cin>>choice;
 
+	if(choice == 1)
+
+	if(choice == 0)
+	{
+		cout<<"------------------------------------ EXEC TEST DRIVER --------------------------------------\n";
+		return 0;
+	}
 
 
 	cout<<"------------------------------------ EXEC TEST DRIVER --------------------------------------\n";
