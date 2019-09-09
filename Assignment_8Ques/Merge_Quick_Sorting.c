@@ -38,8 +38,13 @@ int Partition(int beg, int end){
 void QuickSort(int beg, int end){
 	if(beg<end){
 		int j = Partition(beg, end);
-		QuickSort(beg, j-1);
-		QuickSort(j+1, end);
+		int pidq = vfork();
+		if(pidq == 0)
+		{ 
+			QuickSort(beg, j-1);
+			exit(0);
+		}
+		else if(pidq > 0) QuickSort(j+1, end);
 	}
 }
 
@@ -88,11 +93,20 @@ void MergeSort(int beg, int end)
     if (beg < end) 
     { 
         int mid = (beg+end)/2; 
-
-        MergeSort(beg, mid); 
-        MergeSort(mid+1, end); 
-  
-        MergeArray(beg, mid, end); 
+		
+		int pidm = vfork();
+		if(pidm == 0)
+		{
+			MergeSort(beg, mid); 
+			exit(0);
+		}
+        else if(pidm > 0)
+        {
+        	MergeSort(mid+1, end);
+        	wait(NULL);
+        	
+        	MergeArray(beg, mid, end); 
+        } 
     } 
 }
 // ----------------------------------------------------------- 

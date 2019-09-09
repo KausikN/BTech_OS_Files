@@ -29,56 +29,71 @@ int main()
 
 	if(pid == 0)
 	{
-		printf("Descending order: ");
+		printf("\nDescending order: ");
 		
-		for(int i=0;i<size;i++)
+		int pid2 = vfork();
+		
+		if(pid2 == 0)
 		{
-			int max_i = i;
-			for(int j=i;j<size;j++)
+			for(int i=0;i<size;i++)
 			{
-				if(arr[j] > arr[max_i])
+				int max_i = i;
+				for(int j=i;j<size;j++)
 				{
-					max_i = j;
+					if(arr[j] > arr[max_i])
+					{
+						max_i = j;
+					}
 				}
+				int temp = arr[max_i];
+				arr[max_i] = arr[i];
+				arr[i] = temp;
 			}
-			int temp = arr[max_i];
-			arr[max_i] = arr[i];
-			arr[i] = temp;
+			exit(0);
 		}
+		else if(pid2 > 0)
+		{
+			wait(NULL);
+			for(int i=0;i<size;i++) printf("%d ", arr[i]);
 
-		for(int i=0;i<size;i++) printf("%d ", arr[i]);
-
-		printf("\n");
-		return 0;
+			printf("\n");
+			return 0;
+		}
 	}
 	else if(pid > 0)
 	{
-		wait(NULL);
-		printf("Ascending order: ");
+		//wait(NULL);
+		printf("\nAscending order: ");
 		
-		for(int i=0;i<size;i++)
+		int pid2 = vfork();
+		
+		if(pid2 == 0)
 		{
-			int max_i = 0;
-			for(int j=0;j<size-i;j++)
+			for(int i=0;i<size;i++)
 			{
-				if(arr[j] > arr[max_i])
+				int max_i = 0;
+				for(int j=0;j<size-i;j++)
 				{
-					max_i = j;
+					if(arr[j] > arr[max_i])
+					{
+						max_i = j;
+					}
 				}
+
+				int temp = arr[max_i];
+				arr[max_i] = arr[size - i - 1];
+				arr[size - i - 1] = temp;
 			}
-
-			int temp = arr[max_i];
-			arr[max_i] = arr[size - i - 1];
-			arr[size - i - 1] = temp;
+			exit(0);
 		}
+		else if(pid2 > 0)
+		{
+			wait(NULL);
+			for(int i=0;i<size;i++) printf("%d ", arr[i]);
 
-		for(int i=0;i<size;i++) printf("%d ", arr[i]);
-
-		printf("\n");
-		printf("------------------------------------ ASCENDING AND DESCENDING ORDER SORTING --------------------------------------\n");
-		return 0;
+			printf("\n");
+			printf("------------------------------------ ASCENDING AND DESCENDING ORDER SORTING --------------------------------------\n");
+			return 0;
+		}
 	}
-
-	
-	
 }

@@ -105,12 +105,13 @@ int main()
         printf("Enter the side size of square: ");
         scanf("%d", &side_size);
 
-        int pid = fork();
+        int pid = vfork();
 
         if(pid == 0)
         {
             GenerateSquare(side_size);
-            return 0;
+            exit(0);
+            //return 0;
         }
         else if(pid > 0)
         {

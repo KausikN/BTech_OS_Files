@@ -32,7 +32,7 @@ int main()
 	}
 	else if(pid > 0)
 	{
-		wait(NULL);
+		//wait(NULL);
 		printf("Odd Series: ");
 		for(int i=0;i<size;i++)
 		{

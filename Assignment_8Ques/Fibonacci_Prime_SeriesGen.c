@@ -37,7 +37,7 @@ int main()
 	}
 	else if(pid > 0)
 	{
-		wait(NULL);
+		//wait(NULL);
 		printf("Prime Series: ");
 		int n = 2;
 		int no = 0;
