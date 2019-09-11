@@ -1,0 +1,18 @@
+"FORK LAB Exercises"
+
+0) Test drive the various fork illustrations discussed in the class 
+(1) Test drive the variants of exec system call to execute Linux commands
+(2) Odd and Even series generation using Parent Child relationship
+(3) Fibonacci Series / Prime Number generation using parent child relationship.
+(4)  Ascending Order sort within Parent and Descending order sort  (or vice versa) within the child process of an input array.
+(5) Leading Half of the array in ascending order  by parent and trailing in descending order (or vice versa) by child process. 
+(6) Orphan and Zombie Process Simulation
+(7)merge or quick sort using processes
+(8) command shell + history feature (simulate the behavior of the linux command prompt which keeps executing user commands until user exits)
+
+------------------------------------------------------------------
+
+(optional set - try this post completing the 
+
+(9) Histogram printing of characters in a given text.
+(10) Magic Square Generation (Gen in One process and Check in another)
