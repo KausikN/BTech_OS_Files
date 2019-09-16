@@ -241,7 +241,7 @@ int main()
 			        if(sentence_char == '.' || sentence_char == '\n')
 		        	{
 		        		write(fd[1], b, sizeof(b));
-		        		printf("-", sentence_char);
+		        		printf("-");
 		        	} 
 			    }
 			    fclose(fp);

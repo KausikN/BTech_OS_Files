@@ -76,7 +76,7 @@ int main()
 
 			close(fd[0]);
 
-			printf("Original String: %s\n", text);
+			printf("Original String:\n%s\n", text);
 
 			if(check == 1) printf("\nIt is a palindrome.\n");
 			else printf("\nIt is not a palindrome.\n");
