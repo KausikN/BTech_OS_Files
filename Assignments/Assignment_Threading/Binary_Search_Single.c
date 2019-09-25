@@ -58,7 +58,7 @@ void * BinarySearch(void * d)
 
 int main(int argc, char *argv[])
 {
-	//printf("------------------------------------ MERGE AND QUICK SORTING --------------------------------------\n");
+	//printf("------------------------------------ BINARY SEARCH SINGLE --------------------------------------\n");
 
 	if(argc < 3) printf("Wrong number of parameters.\n");
 	else 
@@ -101,6 +101,6 @@ int main(int argc, char *argv[])
 		printf("\n");
 	}
 	
-	//printf("------------------------------------ MERGE AND QUICK SORTING --------------------------------------\n");
+	//printf("------------------------------------ BINARY SEARCH SINGLE --------------------------------------\n");
 	
 }
