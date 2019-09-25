@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
 	if(argc < 4) printf("Wrong number of parameters.\n");
 	else
 	{
+		//printf("%d\n", argc);
 		M = atoi(argv[1]);
 		N = atoi(argv[2]);
 		K = atoi(argv[3]);
@@ -61,9 +62,11 @@ int main(int argc, char *argv[])
 		{
 			for(int j=0;j<N;j++)
 			{
-				B[i][j] = atoi(argv[ind + i*j + j]);
+				//printf("\nInt: %d,%d -> %d\n", i, j, ind + i*N + j);
+				B[i][j] = atoi(argv[ind + i*N + j]);
 			}
 		}
+		printf("Answer: \n");
 
 		struct pair p[M*N];
 
