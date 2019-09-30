@@ -41,7 +41,9 @@ void * median(int * p)
 			}
 		}
 	}
-	int median = arr[n/2 - 1];
+	int median;
+	if(n%2 == 1) median = arr[(n-1)/2];
+	else median = (arr[n/2] + arr[n/2 - 1]) / 2;
 	printf("\nMedian: %d\n", median);	
 
 	pthread_exit(0);

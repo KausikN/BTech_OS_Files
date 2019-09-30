@@ -166,7 +166,7 @@ int main(int argc, char *argv[])
 		pthread_attr_init(&attr);
 
 		pthread_create(&tid[0], &attr, MergeSort, &d);
-		pthread_create(&tid[0], &attr, QuickSort, &d);
+		pthread_create(&tid[1], &attr, QuickSort, &d);
 
 		pthread_join(tid[0], NULL);
 		pthread_join(tid[1], NULL);
