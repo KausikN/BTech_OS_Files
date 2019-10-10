@@ -4,6 +4,8 @@
 
 int arr[100];
 
+int pos = -1;
+
 struct data
 {
 	int beg;
@@ -27,29 +29,7 @@ void * BinarySearchMultiple(void * d)
 
 		if(arr[mid] == x)
 		{
-			printf("'%d' found at indices: ", x);
-			int lend = 0;
-			while(lend >= 0)
-			{
-				//printf("ls: %d - arr/x: %d/%d\n", lend, arr[mid-lend], x);
-				if(arr[mid-lend] == x)
-				{
-					printf("%d ", mid-lend);
-					lend++;
-				} 
-				else lend = -1;
-			}
-
-			int rend = 1;
-			while(rend >= 1)
-			{
-				if(arr[mid+rend] == x)
-				{
-					printf("%d ", mid+rend);
-					rend++;
-				} 
-				else rend = -1;
-			}	
+			pos = mid;
 		} 
 		else 
 		{
@@ -79,6 +59,33 @@ void * BinarySearchMultiple(void * d)
 	}
 	pthread_exit(0);
 }
+
+void Display(int x)
+{
+	printf("'%d' found at indices: ", x);
+	int lend = 0;
+	while(lend >= 0)
+	{
+		//printf("ls: %d - arr/x: %d/%d\n", lend, arr[pos-lend], x);
+		if(arr[pos-lend] == x)
+		{
+			printf("%d ", pos-lend);
+			lend++;
+		} 
+		else lend = -1;
+	}
+
+	int rend = 1;
+	while(rend >= 1)
+	{
+		if(arr[pos+rend] == x)
+		{
+			printf("%d ", pos+rend);
+			rend++;
+		} 
+		else rend = -1;
+	}
+}
 // ----------------------------------------------------------- 
 
 int main(int argc, char *argv[])
@@ -89,11 +96,6 @@ int main(int argc, char *argv[])
 	else 
 	{
 		int n = argc - 2;
-
-		struct data d;
-		d.beg = 0;
-		d.end = n-1;
-		d.x = atoi(argv[1]);
 
 		for(int i=0;i<n;i++)
 		{
@@ -115,13 +117,36 @@ int main(int argc, char *argv[])
 		for(int i=0;i<n;i++) printf("%d ", arr[i]);
 		*/
 
-		pthread_t tid;
+		struct data d[4];
+		d[0].beg = 0;
+		d[0].end = n/4 - 1;
+		d[0].x = atoi(argv[1]);
+		d[1].beg = n/4;
+		d[1].end = n/2 - 1;
+		d[1].x = atoi(argv[1]);
+		d[2].beg = n/2;
+		d[2].end = 3*n/4 - 1;
+		d[2].x = atoi(argv[1]);
+		d[3].beg = 3*n/4;
+		d[3].end = n-1;
+		d[3].x = atoi(argv[1]);
+
+		pthread_t tid[4];
 		pthread_attr_t attr;
 		pthread_attr_init(&attr);
 
-		pthread_create(&tid, &attr, BinarySearchMultiple, &d);
+		for(int i=0;i<4;i++)
+		{
+			pthread_create(&tid[i], &attr, BinarySearchMultiple, &d[i]);
+		}
+		
+		for(int i=0;i<4;i++)
+		{
+			pthread_join(tid[i], NULL);
+		}
 
-		pthread_join(tid, NULL);
+		if(pos > -1) Display(atoi(argv[1]));
+		else printf("\n%d not found\n", atoi(argv[1]));
 
 		printf("\n");
 	}

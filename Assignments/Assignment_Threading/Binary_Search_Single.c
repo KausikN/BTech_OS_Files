@@ -3,6 +3,7 @@
 #include<stdlib.h>
 
 int arr[100];
+int pos = -1;
 
 struct data
 {
@@ -25,7 +26,11 @@ void * BinarySearch(void * d)
 	{ 
 		int mid = (beg+end)/2;
 
-		if(arr[mid] == x) printf("\n%d found at index %d\n", x, mid);
+		if(arr[mid] == x)
+		{
+			pos = mid;
+			//printf("\n%d found at index %d\n", x, mid);
+		}
 		else 
 		{
 			pthread_t tid;
@@ -65,11 +70,6 @@ int main(int argc, char *argv[])
 	{
 		int n = argc - 2;
 
-		struct data d;
-		d.beg = 0;
-		d.end = n-1;
-		d.x = atoi(argv[1]);
-
 		for(int i=0;i<n;i++)
 		{
 			arr[i] = atoi(argv[2 + i]);
@@ -90,13 +90,36 @@ int main(int argc, char *argv[])
 		for(int i=0;i<n;i++) printf("%d ", arr[i]);
 		*/
 
-		pthread_t tid;
+		struct data d[4];
+		d[0].beg = 0;
+		d[0].end = n/4 - 1;
+		d[0].x = atoi(argv[1]);
+		d[1].beg = n/4;
+		d[1].end = n/2 - 1;
+		d[1].x = atoi(argv[1]);
+		d[2].beg = n/2;
+		d[2].end = 3*n/4 - 1;
+		d[2].x = atoi(argv[1]);
+		d[3].beg = 3*n/4;
+		d[3].end = n-1;
+		d[3].x = atoi(argv[1]);
+
+		pthread_t tid[4];
 		pthread_attr_t attr;
 		pthread_attr_init(&attr);
 
-		pthread_create(&tid, &attr, BinarySearch, &d);
+		for(int i=0;i<4;i++)
+		{
+			pthread_create(&tid[i], &attr, BinarySearch, &d[i]);
+		}
+		
+		for(int i=0;i<4;i++)
+		{
+			pthread_join(tid[i], NULL);
+		}
 
-		pthread_join(tid, NULL);
+		if(pos > -1) printf("\n%d found at index %d\n", atoi(argv[1]), pos);
+		else printf("\n%d not found\n", atoi(argv[1]));
 
 		printf("\n");
 	}

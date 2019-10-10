@@ -1,0 +1,82 @@
+PTHREAD_ATTR_SETSCOPE(3)                      Linux Programmer's Manual                      PTHREAD_ATTR_SETSCOPE(3)
+
+NNAAMMEE
+       pthread_attr_setscope, pthread_attr_getscope - set/get contention scope attribute in thread attributes object
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<pptthhrreeaadd..hh>>
+
+       iinntt pptthhrreeaadd__aattttrr__sseettssccooppee((pptthhrreeaadd__aattttrr__tt **_a_t_t_r,, iinntt _s_c_o_p_e));;
+       iinntt pptthhrreeaadd__aattttrr__ggeettssccooppee((ccoonnsstt pptthhrreeaadd__aattttrr__tt **_a_t_t_r,, iinntt **_s_c_o_p_e));;
+
+       Compile and link with _-_p_t_h_r_e_a_d.
+
+DDEESSCCRRIIPPTTIIOONN
+       The  pptthhrreeaadd__aattttrr__sseettssccooppee()  function  sets  the  contention  scope attribute of the thread attributes object
+       referred to by _a_t_t_r to the value specified in _s_c_o_p_e.  The  contention  scope  attribute  defines  the  set  of
+       threads  against which a thread competes for resources such as the CPU.  POSIX.1 specifies two possible values
+       for _s_c_o_p_e:
+
+       PPTTHHRREEAADD__SSCCOOPPEE__SSYYSSTTEEMM
+              The thread competes for resources with all other threads in all processes on the system that are in the
+              same  scheduling  allocation  domain (a group of one or more processors).  PPTTHHRREEAADD__SSCCOOPPEE__SSYYSSTTEEMM threads
+              are scheduled relative to one another according to their scheduling policy and priority.
+
+       PPTTHHRREEAADD__SSCCOOPPEE__PPRROOCCEESSSS
+              The thread competes for resources with all other threads in the same process  that  were  also  created
+              with  the PPTTHHRREEAADD__SSCCOOPPEE__PPRROOCCEESSSS contention scope.  PPTTHHRREEAADD__SSCCOOPPEE__PPRROOCCEESSSS threads are scheduled relative
+              to other threads in the process according to their scheduling policy and priority.  POSIX.1  leaves  it
+              unspecified  how  these threads contend with other threads in other process on the system or with other
+              threads in the same process that were created with the PPTTHHRREEAADD__SSCCOOPPEE__SSYYSSTTEEMM contention scope.
+
+       POSIX.1 requires that an implementation support at least one  of  these  contention  scopes.   Linux  supports
+       PPTTHHRREEAADD__SSCCOOPPEE__SSYYSSTTEEMM, but not PPTTHHRREEAADD__SSCCOOPPEE__PPRROOCCEESSSS.
+
+       On  systems  that  support  multiple  contention  scopes,  then,  in  order  for the parameter setting made by
+       pptthhrreeaadd__aattttrr__sseettssccooppee() to have effect when calling pptthhrreeaadd__ccrreeaattee(3), the caller must  use  pptthhrreeaadd__aattttrr__sseett‐‐
+       iinnhheerriittsscchheedd(3)    to   set   the   inherit-scheduler   attribute   of   the   attributes   object   _a_t_t_r   to
+       PPTTHHRREEAADD__EEXXPPLLIICCIITT__SSCCHHEEDD.
+
+       The pptthhrreeaadd__aattttrr__ggeettssccooppee() function returns the contention scope attribute of the  thread  attributes  object
+       referred to by _a_t_t_r in the buffer pointed to by _s_c_o_p_e.
+
+RREETTUURRNN VVAALLUUEE
+       On success, these functions return 0; on error, they return a nonzero error number.
+
+EERRRROORRSS
+       pptthhrreeaadd__aattttrr__sseettssccooppee() can fail with the following errors:
+
+       EEIINNVVAALL An invalid value was specified in _s_c_o_p_e.
+
+       EENNOOTTSSUUPP
+              _s_c_o_p_e specified the value PPTTHHRREEAADD__SSCCOOPPEE__PPRROOCCEESSSS, which is not supported on Linux.
+
+AATTTTRRIIBBUUTTEESS
+       For an explanation of the terms used in this section, see aattttrriibbuutteess(7).
+
+       ┌─────────────────────────┬───────────────┬─────────┐
+       │IInntteerrffaaccee                │ AAttttrriibbuuttee     │ VVaalluuee   │
+       ├─────────────────────────┼───────────────┼─────────┤
+       │pptthhrreeaadd__aattttrr__sseettssccooppee(), │ Thread safety │ MT-Safe │
+       │pptthhrreeaadd__aattttrr__ggeettssccooppee()  │               │         │
+       └─────────────────────────┴───────────────┴─────────┘
+CCOONNFFOORRMMIINNGG TTOO
+       POSIX.1-2001, POSIX.1-2008.
+
+NNOOTTEESS
+       The PPTTHHRREEAADD__SSCCOOPPEE__SSYYSSTTEEMM contention scope typically indicates that a user-space thread is bound directly to  a
+       single  kernel-scheduling  entity.  This is the case on Linux for the obsolete LinuxThreads implementation and
+       the modern NPTL implementation, which are both 1:1 threading implementations.
+
+       POSIX.1 specifies that the default contention scope is implementation-defined.
+
+SSEEEE AALLSSOO
+       pptthhrreeaadd__aattttrr__iinniitt(3), pptthhrreeaadd__aattttrr__sseettaaffffiinniittyy__nnpp(3), pptthhrreeaadd__aattttrr__sseettiinnhheerriittsscchheedd(3),
+       pptthhrreeaadd__aattttrr__sseettsscchheeddppaarraamm(3), pptthhrreeaadd__aattttrr__sseettsscchheeddppoolliiccyy(3), pptthhrreeaadd__ccrreeaattee(3), pptthhrreeaaddss(7)
+
+CCOOLLOOPPHHOONN
+       This page is part of release 4.15 of the Linux _m_a_n_-_p_a_g_e_s project.  A description of the project, information
+       about reporting bugs, and the latest version of this page, can be found at
+       https://www.kernel.org/doc/man-pages/.
+
+Linux                                                 2017-09-15                             PTHREAD_ATTR_SETSCOPE(3)
