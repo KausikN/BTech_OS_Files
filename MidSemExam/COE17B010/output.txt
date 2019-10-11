@@ -1,0 +1,255 @@
+kausik@LAPTOP-8U1BRH2Q:/mnt/c/GitHub Codes and Projects/OS Files/OS_Files/MidSemExam$ gcc COE17B010_Code.c -lpthread    
+kausik@LAPTOP-8U1BRH2Q:/mnt/c/GitHub Codes and Projects/OS Files/OS_Files/MidSemExam$ ./a.out a.txt b.txt                                                                                                                                       ------------------------------------ DIFF --------------------------------------                                        
+Difference between a.txt and b.txt:                                                                                     
+1,2c1,3                                                                                                                 
+< 123                                                                                                                   
+< 12                                                                                                                    
+\ No newline at end of file                                                                                             ---                                                                                                                     
+> 21                                                                                                                    
+> 12                                                                                                                    
+> 13                                                                                                                    
+\ No newline at end of file                                                                                                                                                                                                                                                                                                                                             
+Combinations: 1  -  Exe time:  0.043902                                                                                                                                                                                                         
+------------------------------------ DIFF --------------------------------------
+
+kausik@LAPTOP-8U1BRH2Q:/mnt/c/GitHub Codes and Projects/OS Files/OS_Files/MidSemExam$ ./a.out a.txt b.txt c.txt
+
+------------------------------------ DIFF --------------------------------------
+Difference between a.txt and b.txt:
+1,2c1,3
+< 123
+< 12
+\ No newline at end of file
+---
+> 21
+> 12
+> 13
+\ No newline at end of file
+
+Difference between a.txt and c.txt:
+1,2c1,2
+< 123
+< 12
+\ No newline at end of file
+---
+> 1221
+> 2
+\ No newline at end of file
+file
+
+Difference between b.txt and c.txt:
+1,3c1,2
+< 21
+< 12
+< 13
+\ No newline at end of file
+---
+> 1221
+> 2
+\ No newline at end of file
+
+
+Combinations: 3  -  Exe time:  0.074973
+
+------------------------------------ DIFF --------------------------------------
+
+kausik@LAPTOP-8U1BRH2Q:/mnt/c/GitHub Codes and Projects/OS Files/OS_Files/MidSemExam$ ./a.out a.txt b.txt c.txt d.txt
+
+------------------------------------ DIFF --------------------------------------
+Difference between a.txt and b.txt:
+1,2c1,3
+< 123
+< 12
+\ No newline at end of file
+---
+> 21
+> 12
+> 13
+\ No newline at end of file
+
+Difference between a.txt and c.txt:
+1,2c1,2
+< 123
+< 12
+\ No newline at end of file
+---
+> 1221
+> 2
+\ No newline at end of file
+file
+
+Difference between a.txt and d.txt:
+1,2c1,3
+< 123
+< 12
+\ No newline at end of file
+---
+> 12
+> 1
+> 2122
+\ No newline at end of file
+
+Difference between b.txt and c.txt:
+1,3c1,2
+< 21
+< 12
+< 13
+\ No newline at end of file
+---
+> 1221
+> 2
+\ No newline at end of file
+
+
+Difference between b.txt and d.txt:
+1d0
+< 21
+3c2,3
+< 13
+\ No newline at end of file
+---
+> 1
+> 2122
+\ No newline at end of file
+ile
+
+
+Difference between c.txt and d.txt:
+1,2c1,3
+< 1221
+< 2
+\ No newline at end of file
+---
+> 12
+> 1
+> 2122
+\ No newline at end of file
+
+
+Combinations: 6  -  Exe time:  0.160877
+
+------------------------------------ DIFF --------------------------------------
+
+kausik@LAPTOP-8U1BRH2Q:/mnt/c/GitHub Codes and Projects/OS Files/OS_Files/MidSemExam$ ./a.out a.txt b.txt c.txt d.txt e.txt
+
+------------------------------------ DIFF --------------------------------------
+Difference between a.txt and b.txt:
+1,2c1,3
+< 123
+< 12
+\ No newline at end of file
+---
+> 21
+> 12
+> 13
+\ No newline at end of file
+
+Difference between a.txt and c.txt:
+1,2c1,2
+< 123
+< 12
+\ No newline at end of file
+---
+> 1221
+> 2
+\ No newline at end of file
+file
+
+Difference between a.txt and d.txt:
+1,2c1,3
+< 123
+< 12
+\ No newline at end of file
+---
+> 12
+> 1
+> 2122
+\ No newline at end of file
+
+Difference between a.txt and e.txt:
+1,2c1
+< 123
+< 12
+\ No newline at end of file
+---
+> 2
+\ No newline at end of file
+ at end of file
+
+Difference between b.txt and c.txt:
+1,3c1,2
+< 21
+< 12
+< 13
+\ No newline at end of file
+---
+> 1221
+> 2
+\ No newline at end of file
+
+
+Difference between b.txt and d.txt:
+1d0
+< 21
+3c2,3
+< 13
+\ No newline at end of file
+---
+> 1
+> 2122
+\ No newline at end of file
+ile
+
+
+Difference between b.txt and e.txt:
+1,3c1
+< 21
+< 12
+< 13
+\ No newline at end of file
+---
+> 2
+\ No newline at end of file
+ file
+ile
+
+
+Difference between c.txt and d.txt:
+1,2c1,3
+< 1221
+< 2
+\ No newline at end of file
+---
+> 12
+> 1
+> 2122
+\ No newline at end of file
+
+Difference between c.txt and e.txt:
+1d0
+< 1221
+21
+< 2
+\ No newline at end of file
+---
+> 12
+> 1
+> 2122
+\ No newline at end of file
+
+Difference between d.txt and e.txt:
+1,3c1
+< 12
+< 1
+< 2122
+\ No newline at end of file
+---
+> 2
+\ No newline at end of file
+d of file
+
+
+Combinations: 10  -  Exe time:  0.256135
+
+------------------------------------ DIFF --------------------------------------
+
