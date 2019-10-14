@@ -274,6 +274,7 @@ void externalSort(char* input_file,  char *output_file,
 
 int main() 
 { 
+    //printf("------------------------------------ EXTERNAL QUICK --------------------------------------\n");
 	char input_file[] = "input.txt"; 
     char output_file[] = "output.txt"; 
 
@@ -302,5 +303,6 @@ int main()
     externalSort(input_file, output_file, num_ways); 
   
     return 0; 
+    //printf("------------------------------------ EXTERNAL QUICK --------------------------------------\n");
 } 
 

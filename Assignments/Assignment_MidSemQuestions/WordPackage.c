@@ -26,7 +26,7 @@ void * InsertionSort(void * param)
 			else break;
 		}
 	}
-
+	
 	pthread_exit(0);
 }
 // ----------------------------------------------------------- 

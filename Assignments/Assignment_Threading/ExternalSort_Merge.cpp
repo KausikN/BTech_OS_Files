@@ -277,6 +277,7 @@ void externalSort(char* input_file,  char *output_file,
  
 int main() 
 {  
+	//printf("------------------------------------ EXTERNAL MERGE --------------------------------------\n");
     char input_file[] = "input.txt"; 
     char output_file[] = "output.txt"; 
 
@@ -306,5 +307,6 @@ int main()
                 run_size); 
   
     return 0; 
+    //printf("------------------------------------ EXTERNAL MERGE --------------------------------------\n");
 } 
 
