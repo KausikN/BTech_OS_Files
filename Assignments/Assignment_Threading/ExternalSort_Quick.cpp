@@ -1,65 +1,52 @@
 #include <bits/stdc++.h> 
 using namespace std; 
-  
 
-struct data{
+int arr[1000];
+  
+struct data
+{
     int beg;
     int end;
-    int arr[1000];
-    
 };
 
 int run_size;
 
 struct MinHeapNode 
 { 
-    // The element to be stored 
     int element; 
-  
-    // index of the array from which the element is taken 
+
     int i; 
 }; 
-  
-// Prototype of a utility function to swap two min heap nodes 
+
 void swap(MinHeapNode* x, MinHeapNode* y); 
-  
-// A class for Min Heap 
+ 
 class MinHeap 
 { 
-    MinHeapNode* harr; // pointer to array of elements in heap 
-    int heap_size;     // size of min heap 
+    MinHeapNode* harr;
+    int heap_size; 
   
 public: 
-    // Constructor: creates a min heap of given size 
     MinHeap(MinHeapNode a[], int size); 
-  
-    // to heapify a subtree with root at given index 
+
     void MinHeapify(int); 
-  
-    // to get index of left child of node at index i 
+ 
     int left(int i) { return (2 * i + 1); } 
-  
-    // to get index of right child of node at index i 
+
     int right(int i) { return (2 * i + 2); } 
-  
-    // to get the root 
+
     MinHeapNode getMin() {  return harr[0]; } 
-  
-    // to replace root with new node x and heapify() 
-    // new root 
+
     void replaceMin(MinHeapNode x) 
     { 
         harr[0] = x; 
         MinHeapify(0); 
     } 
 }; 
-  
-// Constructor: Builds a heap from a given array a[] 
-// of given size 
+
 MinHeap::MinHeap(MinHeapNode a[], int size) 
 { 
     heap_size = size; 
-    harr = a; // store address of array 
+    harr = a;
     int i = (heap_size - 1) / 2; 
     while (i >= 0) 
     { 
@@ -67,10 +54,7 @@ MinHeap::MinHeap(MinHeapNode a[], int size)
         i--; 
     } 
 } 
-  
-// A recursive method to heapify a subtree with root 
-// at given index. This method assumes that the 
-// subtrees are already heapified 
+
 void MinHeap::MinHeapify(int i) 
 { 
     int l = left(i); 
@@ -86,8 +70,7 @@ void MinHeap::MinHeapify(int i)
         MinHeapify(smallest); 
     } 
 } 
-  
-// A utility function to swap two elements 
+
 void swap(MinHeapNode* x, MinHeapNode* y) 
 { 
     MinHeapNode temp = *x; 
@@ -95,63 +78,56 @@ void swap(MinHeapNode* x, MinHeapNode* y)
     *y = temp; 
 } 
 
-int partition(int ArrQ[], int beg,int end){
-    int pivot=ArrQ[beg];
+int partition(int beg,int end){
+    int pivot=arr[beg];
     int i=beg;
     int j=end;
     while(i<j){ 
         
-        while(ArrQ[i]<=pivot && i<end)
+        while(arr[i]<=pivot && i<end)
             i++;
             
-        while(ArrQ[j]>pivot && j>beg)
+        while(arr[j]>pivot && j>beg)
             j--;
             
         if(i<j){
-            int temp=ArrQ[i];
-            ArrQ[i]=ArrQ[j];
-            ArrQ[j]=temp;
+            int temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
         }
     }
     
 
-    int temp=ArrQ[beg];
-    ArrQ[beg]=ArrQ[j];
-    ArrQ[j]=temp;
+    int temp=arr[beg];
+    arr[beg]=arr[j];
+    arr[j]=temp;
 
 
 return j;
 }
-  
-/* l is for left index and r is right index of the 
-   sub-array of arr to be sorted */
 
 void * quickSort(void *param)
 { 
     struct data *DQ = (struct data *)param;
     int l= DQ->beg;
     int r= DQ->end;
-    int arr[1000];
-    for(int i=0; i<run_size; i++)
-        arr[i]=DQ->arr[i];
+
+    // for(int i=0; i<run_size; i++)
+    //     arr[i]=DQ->arr[i];
 
     if (l < r) 
     { 
-        // Same as (l+r)/2, but avoids overflow for 
-        // large l and h 
         int j;
-        j=partition(arr, l,r);
-  
-        // Sort first and second halves 
+        j=partition(l,r);
 
         struct data QLeft,QRight;
         QLeft.beg = l;
         QLeft.end = j-1;
         
-        for(int i=0; i<run_size; i++){
-            QLeft.arr[i]=arr[i];
-            QRight.arr[i] =arr[i];
-        }
+        // for(int i=0; i<run_size; i++){
+        //     QLeft.arr[i]=arr[i];
+        //     QRight.arr[i] =arr[i];
+        // }
 
         QRight.beg = j+1;
         QRight.end = r;
@@ -184,94 +160,68 @@ FILE* openFile(char* fileName, char* mode)
     } 
     return fp; 
 } 
-  
-// Merges k sorted files.  Names of files are assumed 
-// to be 1, 2, 3, ... k 
+
 void mergeFiles(char *output_file, int n, int k) 
 { 
     FILE* in[k]; 
     for (int i = 0; i < k; i++) 
     { 
         char fileName[2]; 
-  
-        // convert i to string 
+
         snprintf(fileName, sizeof(fileName), "%d", i); 
-  
-        // Open output files in read mode. 
+ 
         in[i] = openFile(fileName, "r"); 
     } 
-  
-    // FINAL OUTPUT FILE 
+
     FILE *out = openFile(output_file, "w"); 
-  
-    // Create a min heap with k heap nodes.  Every heap node 
-    // has first element of scratch output file 
+
     MinHeapNode* harr = new MinHeapNode[k]; 
     int i; 
     for (i = 0; i < k; i++) 
     { 
-        // break if no output file is empty and 
-        // index i will be no. of input files 
         if (fscanf(in[i], "%d ", &harr[i].element) != 1) 
             break; 
   
-        harr[i].i = i; // Index of scratch output file 
+        harr[i].i = i;
     } 
-    MinHeap hp(harr, i); // Create the heap 
+    MinHeap hp(harr, i);
   
     int count = 0; 
-  
-    // Now one by one get the minimum element from min 
-    // heap and replace it with next element. 
-    // run till all filled input files reach EOF 
+ 
     while (count != i) 
     { 
-        // Get the minimum element and store it in output file 
         MinHeapNode root = hp.getMin(); 
         fprintf(out, "%d ", root.element); 
-  
-        // Find the next element that will replace current 
-        // root of heap. The next element belongs to same 
-        // input file as the current min element. 
+
         if (fscanf(in[root.i], "%d ", &root.element) != 1 ) 
         { 
             root.element = INT_MAX; 
             count++; 
         } 
-  
-        // Replace root with next element of input file 
+
         hp.replaceMin(root); 
     } 
-  
-    // close input and output files 
+
     for (int i = 0; i < k; i++) 
         fclose(in[i]); 
   
     fclose(out); 
 } 
-  
-// Using a merge-sort algorithm, create the initial runs 
-// and divide them evenly among the output files 
+
 void createInitialRuns(char *input_file, int num_ways) 
 { 
-    // For big input file 
     FILE *in = openFile(input_file, "r"); 
-  
-    // output scratch files 
+
     FILE* out[num_ways]; 
     char fileName[2]; 
     for (int i = 0; i < num_ways; i++) 
     { 
-        // convert i to string 
         snprintf(fileName, sizeof(fileName), "%d", i); 
-  
-        // Open output files in write mode. 
+
         out[i] = openFile(fileName, "w"); 
     } 
-  
-    // allocate a dynamic array large enough 
-    // to accommodate runs of size run_size 
-    int* arr = (int*)malloc(run_size * sizeof(int)); 
+
+    // int* arr = (int*)malloc(run_size * sizeof(int)); 
   
     bool more_input = true; 
     int next_output_file = 0; 
@@ -279,7 +229,6 @@ void createInitialRuns(char *input_file, int num_ways)
     int i; 
     while (more_input) 
     { 
-        // write run_size elements into arr from input file 
         for (i = 0; i < run_size; i++) 
         { 
             if (fscanf(in, "%d ", &arr[i]) != 1) 
@@ -288,8 +237,7 @@ void createInitialRuns(char *input_file, int num_ways)
                 break; 
             } 
         } 
-  
-        // sort array using merge sort 
+
         pthread_t tid;
         pthread_attr_t attr;
         pthread_attr_init (&attr);
@@ -297,61 +245,57 @@ void createInitialRuns(char *input_file, int num_ways)
         struct data StQ;
         StQ.beg = 0;
         StQ.end = i-1;
-        for(int i=0;i<run_size;i++)
-            StQ.arr[i] = arr[i];
+        // for(int i=0;i<run_size;i++)
+        //     StQ.arr[i] = arr[i];
 
         pthread_create(&tid,&attr,quickSort,&StQ);
         pthread_join(tid,NULL);
 
-         
-        // write the records to the appropriate scratch output file 
-        // can't assume that the loop runs to run_size 
-        // since the last run's length may be less than run_size 
         for (int j = 0; j < i; j++) 
             fprintf(out[next_output_file], "%d ", arr[j]); 
   
         next_output_file++; 
     } 
-  
-    // close input and output files 
+
     for (int i = 0; i < num_ways; i++) 
         fclose(out[i]); 
   
     fclose(in); 
 } 
-  
-// For sorting data stored on disk 
+
 void externalSort(char* input_file,  char *output_file, 
                   int num_ways) 
 { 
-    // read the input file, create the initial runs, 
-    // and assign the runs to the scratch output files 
     createInitialRuns(input_file, num_ways); 
-  
-    // Merge the runs using the K-way merging 
+
     mergeFiles(output_file, run_size, num_ways); 
 } 
-  
-  
-// Driver program to test above 
+
+
 int main() 
 { 
-    // No. of Partitions of input file. 
-    int num_ways = 10; 
-  
-    // The size of each partition 
-    run_size = 1000; 
-  
-    char input_file[] = "input.txt"; 
+	char input_file[] = "input.txt"; 
     char output_file[] = "output.txt"; 
+
+    cout<<"Enter input file name: ";
+    cin>>input_file;
+    cout<<"Enter output file name: ";
+    cin>>output_file;
+
+    int num_ways = 10;
+    cout<<"Enter number of splits: ";
+    cin>>num_ways;
+
+    run_size = 1000;
+    cout<<"Enter run size: ";
+    cin>>run_size;
   
     FILE* in = openFile(input_file, "w"); 
   
     srand(time(NULL)); 
-  
-    // generate input 
+    
     for (int i = 0; i < num_ways * run_size; i++) 
-        fprintf(in, "%d ", rand()); 
+        fprintf(in, "%d ", rand()%100); 
   
     fclose(in); 
   
