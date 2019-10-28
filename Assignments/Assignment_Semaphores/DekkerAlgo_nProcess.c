@@ -65,9 +65,23 @@ void * runner(void * d)
 		// square_points++;
 		// printf("pr: %d - pt: %d - EXIT\n", p->i, no_of_points);
 		// CS
-
+		// int j = (p->i + 1) % no_of_process;
+		// while(j != p->i && flag[j] == 0)
+		// {
+		// 	//printf("\t\tEXITCOND pr: %d, j: %d\n", p->i, j);
+		// 	j = (j + 1) % no_of_process;
+		// }
+		// if(j == p->i)
+		// {
+		// 	turn = p->i;
+		// }
+		// else
+		// {
+		// 	turn = j;
+		// }
+        // flag[p->i] = 0;
+		
 		turn = (p->i + 1) % no_of_process;
-        flag[p->i] = 0;
 
 	} while(no_of_points < interval*interval);
 
