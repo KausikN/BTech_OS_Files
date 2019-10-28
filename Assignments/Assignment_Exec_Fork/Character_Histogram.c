@@ -1,6 +1,10 @@
 #include<stdio.h>
 #include<unistd.h>
 #include<string.h>
+#include<sys/wait.h>
+#include<stdlib.h>
+
+#define totchars 128
 //#include<process.h>
 
 
@@ -18,19 +22,18 @@ int main()
 
 	while(1)
 	{
-		
+
 		printf("Enter the text: ");
 		scanf("%s", text);
 
-		int totchars = 128;
-		int freq[totchars];
-		for(int i=0;i<totchars;i++)
-		{
-			freq[i] = 0;
-		}
-		
+		int freq[totchars] = {0};
+		// for(int i=0;i<totchars;i++)
+		// {
+		// 	freq[i] = 0;
+		// }
+
 		int pid = vfork();
-		
+
 		if(pid == 0)
 		{
 			for(int i=0;i<strlen(text);i++)
@@ -42,7 +45,7 @@ int main()
 		else if (pid > 0)
 		{
 			wait(NULL);
-			
+
 			for(int i=0;i<totchars;i++)
 			{
 				printf("%c (%d) ", (char)i, freq[i]);
