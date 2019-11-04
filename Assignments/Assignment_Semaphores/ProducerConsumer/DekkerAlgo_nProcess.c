@@ -3,12 +3,6 @@
 #include<pthread.h>
 #define MAX_PROCESSES 100
 
-int circle_points = 0, square_points = 0;
-double rand_x, rand_y, origin_dist;
-int interval;
-
-int no_of_points = 0;
-
 struct data
 {
 	int i;
@@ -51,39 +45,13 @@ void * runner(void * d)
 		if(p->i % 2 == 0)x++;
 		else x--;
 		printf("EXIT P: %d, X: %d\n", p->i, x);
-		// printf("pr: %d - pt: %d - ENTER\n", p->i, no_of_points);
-		// no_of_points++;
-		//
-		// rand_x = (double)(rand() % (interval + 1)) / interval;
-		// rand_y = (double)(rand() % (interval + 1)) / interval;
-		//
-		// origin_dist = rand_x * rand_x + rand_y * rand_y;
-		//
-		// if (origin_dist <= 1)
-		// 	circle_points++;
-		//
-		// square_points++;
-		// printf("pr: %d - pt: %d - EXIT\n", p->i, no_of_points);
-		// CS
-		// int j = (p->i + 1) % no_of_process;
-		// while(j != p->i && flag[j] == 0)
-		// {
-		// 	//printf("\t\tEXITCOND pr: %d, j: %d\n", p->i, j);
-		// 	j = (j + 1) % no_of_process;
-		// }
-		// if(j == p->i)
-		// {
-		// 	turn = p->i;
-		// }
-		// else
-		// {
-		// 	turn = j;
-		// }
-        // flag[p->i] = 0;
-		
-		turn = (p->i + 1) % no_of_process;
+		sleep(1);
+        // CS
 
-	} while(no_of_points < interval*interval);
+		turn = (p->i + 1) % no_of_process;
+		flag[p->i] = 0;
+
+	} while(1);
 
 	pthread_exit(0);
 }
@@ -93,11 +61,10 @@ int main(int argc, char *argv[])
 {
 	//printf("------------------------------------ Dekkers Algo --------------------------------------\n");
 
-	if(argc != 3) printf("Wrong number of parameters.\n");
+	if(argc != 2) printf("Wrong number of parameters.\n");
 	else
 	{
 		no_of_process = atoi(argv[1]);
-		interval = atoi(argv[2]);
 
 		pthread_t tid[no_of_process];
 		pthread_attr_t attr;
@@ -117,9 +84,6 @@ int main(int argc, char *argv[])
 		{
 			pthread_join(tid[i], NULL);
 		}
-
-	    double pi = (double)(4 * circle_points) / square_points;
-	    printf("\nFinal Estimation of Pi = %f,\n", pi);
 	}
 	printf("\n");
 	//printf("------------------------------------ Dekkers Algo --------------------------------------\n");

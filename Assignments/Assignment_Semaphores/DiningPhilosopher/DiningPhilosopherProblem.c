@@ -1,25 +1,25 @@
 #include<stdio.h>
 #include<semaphore.h>
 #include<pthread.h>
-   
+
 #define N 5
 #define THINKING 0
 #define HUNGRY 1
 #define EATING 2
-#define LEFT (ph_num+4)%N
+#define LEFT (ph_num+N-1)%N
 #define RIGHT (ph_num+1)%N
-   
+
 sem_t mutex;
 sem_t S[N];
-   
+
 void * philospher(void *num);
 void take_fork(int);
 void put_fork(int);
 void test(int);
-   
+
 int state[N];
 int phil_num[N]={0,1,2,3,4};
-   
+
 int main()
 {
     int i;
@@ -35,7 +35,7 @@ int main()
     for(i=0;i<N;i++)
         pthread_join(thread_id[i],NULL);
 }
-   
+
 void *philospher(void *num)
 {
     while(1)
@@ -47,7 +47,7 @@ void *philospher(void *num)
         put_fork(*i);
     }
 }
-   
+
 void take_fork(int ph_num)
 {
     sem_wait(&mutex);
@@ -58,7 +58,7 @@ void take_fork(int ph_num)
     sem_wait(&S[ph_num]);
    // sleep(1);
 }
-   
+
 void test(int ph_num)
 {
     if (state[ph_num] == HUNGRY && state[LEFT] != EATING && state[RIGHT] != EATING)
@@ -70,7 +70,7 @@ void test(int ph_num)
         sem_post(&S[ph_num]);
     }
 }
-   
+
 void put_fork(int ph_num)
 {
     sem_wait(&mutex);

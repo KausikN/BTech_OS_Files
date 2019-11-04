@@ -3,12 +3,6 @@
 #include<pthread.h>
 #define MAX_PROCESSES 100
 
-int circle_points = 0, square_points = 0;
-double rand_x, rand_y, origin_dist;
-int interval;
-
-int no_of_points = 0;
-
 struct data
 {
 	int i;
@@ -25,7 +19,7 @@ int test_set(int *target)
 	return rv;
 }
 // -----------------------------------------------------------
-
+int x = 5;
 void * runner(void * d)
 {
 	struct data *p = (struct data *)d;
@@ -41,19 +35,11 @@ void * runner(void * d)
 		}
 
 		// CS
-		printf("pr: %d - pt: %d - ENTER\n", p->i, no_of_points);
-		no_of_points++;
-
-		rand_x = (double)(rand() % (interval + 1)) / interval;
-		rand_y = (double)(rand() % (interval + 1)) / interval;
-
-		origin_dist = rand_x * rand_x + rand_y * rand_y;
-
-		if (origin_dist <= 1)
-			circle_points++;
-
-		square_points++;
-		printf("pr: %d - pt: %d - EXIT\n", p->i, no_of_points);
+		printf("ENTER P: %d, X: %d\n", p->i, x);
+		if(p->i % 2 == 0)x++;
+		else x--;
+		printf("EXIT P: %d, X: %d\n", p->i, x);
+		sleep(1);
 		// CS
 
 		waiting[p->i] = 0;
@@ -73,7 +59,7 @@ void * runner(void * d)
 			waiting[j] = 0;
 		}
 
-	} while(no_of_points < interval*interval);
+	} while(1);
 
 	pthread_exit(0);
 }
@@ -83,11 +69,10 @@ int main(int argc, char *argv[])
 {
 	//printf("------------------------------------ Petersons Algo --------------------------------------\n");
 
-	if(argc != 3) printf("Wrong number of parameters.\n");
+	if(argc != 2) printf("Wrong number of parameters.\n");
 	else
 	{
 		no_of_process = atoi(argv[1]);
-		interval = atoi(argv[2]);
 
 		pthread_t tid[no_of_process];
 		pthread_attr_t attr;
@@ -107,9 +92,6 @@ int main(int argc, char *argv[])
 		{
 			pthread_join(tid[i], NULL);
 		}
-
-	    double pi = (double)(4 * circle_points) / square_points;
-	    printf("\nFinal Estimation of Pi = %f,\n", pi);
 	}
 	printf("\n");
 	//printf("------------------------------------ Petersons Algo --------------------------------------\n");
