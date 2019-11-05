@@ -24,22 +24,27 @@ int rope_broken = 0;				// 0 if no of baboons_crossing < rope_capacity
 void * runner(void * d)
 {
 	struct data *p = (struct data *)d;
+
+	int passed = 0;
 	do
 	{
-		while(flag == 0) printf("Stuck...\n");
-
+		//while(flag == 0 && passed == 1) printf("\t\t\t\tStuck - flag - %d (%d)...\n", p->i, p->flow);
+		sleep(1);
+		passed = 0;
 		sem_wait(&mutex);
 
 		if(p->flow != current_flow_direction)
 		{
+			//printf("\t\tIn flow != curdir - %d (%d), flowchange = %d...\n", p->i, p->flow, flow_changing);
 			flow_changing = 1;
-			while(baboons_crossing > 0 && current_flow_direction != p->flow);
+			while(baboons_crossing > 0 && current_flow_direction != p->flow);//printf("\t\t\t\tStuck - flow - %d (%d), crossing: %d, curdir: %d...\n", p->i, p->flow, baboons_crossing, current_flow_direction);
 			flow_changing = 0;
 			current_flow_direction = p->flow;
 			flag = 1;
 		}
 		else
 		{
+			//printf("\t\tIn flow == curdir - %d (%d), flowchange = %d...\n", p->i, p->flow, flow_changing);
 			if(flow_changing == 1)
 			{
 				while((flow_changing == 1 && current_flow_direction == p->flow) || (flow_changing == 0 && current_flow_direction != p->flow));
@@ -48,14 +53,15 @@ void * runner(void * d)
 		// CS
 		printf("ENTER B: %d - \t\tflow %d\t\t - \t\t%d / %d\n", p->i, current_flow_direction, baboons_crossing, rope_capacity);
 		baboons_crossing++;
+		//sleep(1);
 		printf("EXITE B: %d - \t\tflow %d\t\t - \t\t%d / %d\n", p->i, current_flow_direction, baboons_crossing, rope_capacity);
-		sleep(1);
+		baboons_crossing--;
         // CS
 
-		baboons_crossing--;
 		sem_post(&mutex);
 
-		if(flag==1) flag = 0;
+		flag = 0;
+		passed = 1;
 
 	} while(1);
 
