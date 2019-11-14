@@ -54,7 +54,7 @@ void * runner(void * d)
 		printf("ENTER B: %d - \t\tflow %d\t\t - \t\t%d / %d\n", p->i, current_flow_direction, baboons_crossing, rope_capacity);
 		baboons_crossing++;
 		//sleep(1);
-		printf("EXITE B: %d - \t\tflow %d\t\t - \t\t%d / %d\n", p->i, current_flow_direction, baboons_crossing, rope_capacity);
+		printf("EXIT B: %d - \t\tflow %d\t\t - \t\t%d / %d\n", p->i, current_flow_direction, baboons_crossing, rope_capacity);
 		baboons_crossing--;
         // CS
 
@@ -71,6 +71,7 @@ void * runner(void * d)
 
 int main(int argc, char *argv[])
 {
+	printf("%d\n", (-6%5));
 	//printf("------------------------------------ Baboon Crossing --------------------------------------\n");
 
 	if(argc != 2) printf("Wrong number of parameters.\n");
