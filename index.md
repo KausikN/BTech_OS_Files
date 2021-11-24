@@ -1,37 +1,44 @@
-## Welcome to GitHub Pages
+# BTech OS Files
 
-You can use the [editor on GitHub](https://github.com/KausikN/BTech_OS_Files/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+📖 Academic Files and Codes
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Institute
 
-### Markdown
+🧑‍🎓 B.Tech (H), IIITDM Kancheepuram
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Course
 
-```markdown
-Syntax highlighted code block
+|    Name    |   Roll No   | SEM |        Course Name         |
+| :--------: | :---------: | :-: | :------------------------: |
+|  N Kausik  |  COE17B010  |  5  | Operating Systems Practice |
 
-# Header 1
-## Header 2
-### Header 3
+## Codes
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/KausikN/BTech_OS_Files/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+  - Codes
+    - Scheduling Algorithms
+        - [FCFS](Codes/ShedulerAlgos/FcFs.cpp)
+        - [SJF](Codes/ShedulerAlgos/Sjf.cpp)
+        - [RR](Codes/ShedulerAlgos/RoundRobin.cpp)
+        - [HRRN Non Preemptive](Codes/ShedulerAlgos/HRRN_NP.cpp)
+        - [HRRN Preemptive](Codes/ShedulerAlgos/HRRN_P.cpp)
+        - [SRT](Codes/ShedulerAlgos/Srt.cpp)
+        - [Priority Non Preemptive](Codes/ShedulerAlgos/Priority_NP.cpp)
+        - [Priority Preemptive](Codes/ShedulerAlgos/Priority_P.cpp)
+        - [Priority Preemptive With Aging](Codes/ShedulerAlgos/Priority_P_Aging.cpp)
+        - [Round Robin](Codes/ShedulerAlgos/RoundRobin.cpp)
+    - [Exec](Codes/Fork_Exec/Exec.cpp)
+    - [Pipes](Codes/Pipes/)
+    - [Semaphores](Codes/Semaphores/)
+ - Assignments
+    - [Android Pie](Assignments/Assignment_AndroidPie/)
+    - [Classes Templates](Assignments/Assignment_Classes_Templates/)
+    - [Exec Fork](Assignments/Assignment_Exec_Fork/)
+    - [Mid Sem](Assignments/Assignment_MidSemQuestions/)
+    - [Pipes](Assignments/Assignment_Pipes/)
+    - [Semaphores](Assignments/Assignment_Semaphores/)
+    - [Threading](Assignments/Assignment_Threading/)
+ - Mid Sem
+    - [Diff Tool](MidSem/DiffTool.c)
+ - End Sem
+    - [Faneuil Hall](EndSem/FaneuilHall.c)
+    - [Hessian Matrix](EndSem/HessianMatrix.c)
